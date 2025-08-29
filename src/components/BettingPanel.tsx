@@ -48,11 +48,7 @@ export function BettingPanel({
   const canCashOut = gameStatus === 'flying' && activeBet?.active;
 
   return (
-    <div className="bg-slate-800 rounded-xl p-6 space-y-6">
-      <div className="text-center">
-        <h2 className="text-2xl font-bold text-white mb-2">Place Your Bet</h2>
-        <div className="text-gray-400">Balance: <span className="text-yellow-400 font-semibold">৳{user.balance.toFixed(2)}</span></div>
-      </div>
+    
 
       {/* Bet Amount */}
       <div className="space-y-3">
