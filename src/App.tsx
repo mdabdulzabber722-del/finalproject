@@ -10,6 +10,7 @@ import { LiveBets } from './components/LiveBets';
 import { MultiplierDisplay } from './components/MultiplierDisplay';
 import { ReferralPanel } from './components/ReferralPanel';
 import DepositModal from './components/wallet/DepositModal';
+import { SupportSection } from './components/SupportSection';
 import { useGameEngine } from './hooks/useGameEngine';
 import { useFirebaseAuth } from './hooks/useFirebaseAuth';
 
@@ -39,6 +40,7 @@ function App() {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showAdminPanel, setShowAdminPanel] = useState(false);
   const [activeTab, setActiveTab] = useState<'game' | 'referral'>('game');
+  const [showRoundHistory, setShowRoundHistory] = useState(false);
 
   // Find user's active bet
   const userActiveBet = user ? activeBets.find(bet => bet.userId === user.id) : undefined;
@@ -251,6 +253,9 @@ function App() {
               >
                 Get Started
               </button>
+              
+              <div className="mt-16">
+              </div>
             </div>
           </div>
         ) : (
@@ -297,7 +302,9 @@ function App() {
                   <GameChart 
                     multiplier={gameState.currentMultiplier}
                     status={gameState.status}
-                    history={gameHistory.map(h => h.multiplier)}
+                    history={gameHistory}
+                    showHistory={showRoundHistory}
+                    onToggleHistory={() => setShowRoundHistory(!showRoundHistory)}
                   />
                   
                   {/* Mobile: Show Betting Panel before Live Bets */}
@@ -339,7 +346,7 @@ function App() {
                     />
                   </div>
                   
-                  <GameHistory history={gameHistory} />
+                  <SupportSection />
                 </div>
               </>
             ) : (
